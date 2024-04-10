@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  card,
-  insideCard,
-  wrapperInputBorderBottom,
-  inputTransparent,
-  btnDefault
-} from 'styles/tailwind.classes';
+import { card, insideCard, btnDefault } from 'styles/tailwind.classes';
+import InputBase from './InputBase';
 
 const Signup = () => {
   return (
@@ -18,23 +13,12 @@ const Signup = () => {
           <p className="dark:text-gray-100"> one account for everything!</p>
         </div>
 
-        <div className={wrapperInputBorderBottom}>
-          <label className="block dark:text-gray-100 text-sm mb-2">
-            Username
-          </label>
-          <input
-            type="email"
-            placeholder="your_name@email.com"
-            className={inputTransparent}
-          />
-        </div>
-
-        <div className={wrapperInputBorderBottom}>
-          <label className="block dark:text-gray-100 text-sm mb-2">
-            Password
-          </label>
-          <input type="password" className={inputTransparent} />
-        </div>
+        <InputBase
+          label="Email"
+          type="email"
+          placeholder="input your email..."
+        />
+        <InputBase label="Password" type="password" />
 
         <button className={btnDefault}>Create Account</button>
         <div>
