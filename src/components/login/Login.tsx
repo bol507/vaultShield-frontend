@@ -44,7 +44,7 @@ const Login = () => {
       if (!errorsForm.email && !errorsForm.password) {
         await loginUser(infoUser);
         showNotification({
-          message: 'Registration successfuly!',
+          message: 'Logind successfuly!',
           variant: 'success'
         });
         navigate('/');
@@ -52,7 +52,7 @@ const Login = () => {
     } catch (err) {
       if (err instanceof Error) setErrors({ error: err.message });
       showNotification({
-        message: 'Error in registration!',
+        message: 'Error in Logging user!',
         variant: 'danger'
       });
     }
