@@ -1,5 +1,5 @@
 import { useContext, useState, MouseEventHandler } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { validateForm } from 'utils/validations';
 import { btnDefault } from 'styles/tailwind.classes';
@@ -14,7 +14,7 @@ interface ErrorsForm {
   error?: string;
 }
 
-const Signup = ({ handleSignup }) => {
+const Signup = () => {
   const navigate = useNavigate();
   //context
   const { addUser } = useContext(UserContext);
@@ -62,11 +62,6 @@ const Signup = ({ handleSignup }) => {
     }
   };
 
-  const handleLoginClick = (e) => {
-    e.preventDefault();
-    handleSignup();
-  };
-
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="border rounded-md shadow-xl h-max w-max m-0 pb-4 px-4 dark:bg-zinc-900 dark:border-zinc-800 dark:text-white flex flex-col">
@@ -106,12 +101,13 @@ const Signup = ({ handleSignup }) => {
           {errors.error && <p className="text-red-500">{errors.error}</p>}{' '}
           <div>
             <span>Already have an account?</span>
-            <span
+
+            <Link
               className="ml-2 hover:underline hover:text-cinder-600 text-cinder-400 cursor-pointer"
-              onClick={(e) => handleLoginClick(e)}
+              to="/login"
             >
               Login
-            </span>
+            </Link>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import HomeLayout from 'layouts/HomeLayout';
 import Home from 'pages/Home';
 import Dashboard from 'pages/Dashboard';
 //components
-import { Login } from 'components/login';
+import Login from 'components/login';
 import Signup from 'components/Signup';
 import Notification from 'components/Notification';
 import Generator from 'components/Generator';
@@ -78,7 +78,6 @@ const App = () => {
     routes = (
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} />
-        {/* lo mas probable borrar estas dos lineas porque no seran necesarias */}
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
       </Route>
