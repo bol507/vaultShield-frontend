@@ -1,0 +1,28 @@
+{
+    "window.zoomLevel":-2,
+    "terminal.integrated.fontSize": 14,
+
+    "files.associations": {
+        "*.css" : "tailwindcss"
+    },
+
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "on",
+        "strings": "on"
+    },
+
+    "eslint.validate": [
+        "html",
+        "javascript",
+        "javascriptreact"
+    ],
+    
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+
+    "editor.tabSize": 2
+    
+
+}

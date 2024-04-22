@@ -1,0 +1,28 @@
+/** @type {import('tailwindcss').Config} */
+import '@tailwindcss/forms';
+
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        cinder: {
+          50: '#f2f3fb',
+          100: '#e7e9f8',
+          200: '#d4d7f1',
+          300: '#babde7',
+          400: '#a09edb',
+          500: '#8c85cf',
+          600: '#7b6cbf',
+          700: '#6253ff',
+          750: '#5e3fff',
+          800: '#330ECB',
+          900: '#00036D',
+          950: '#13111c'
+        }
+      }
+    }
+  },
+  plugins: ['@tailwindcss/forms'],
+  darkMode: 'class'
+};
