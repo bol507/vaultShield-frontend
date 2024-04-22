@@ -2,7 +2,7 @@ import { useContext, useState, MouseEventHandler } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { validateForm } from 'utils/validations';
-import { card, insideCard, btnDefault } from 'styles/tailwind.classes';
+import { btnDefault } from 'styles/tailwind.classes';
 import InputBase from 'components/InputBase';
 import { UserContext } from 'contexts/userContext';
 import { NotificationContext } from 'contexts/notificationContext';

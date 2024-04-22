@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Outlet, Link, NavLink } from 'react-router-dom';
 import { useTheme } from 'hooks/useTheme';
 import { SvgGear } from 'components/svg/SvgGear';
