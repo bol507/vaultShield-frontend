@@ -16,7 +16,6 @@ export interface User {
 
 const register = async (payload: User) => {
   try {
-    //const hashedPassword = await bcrypt.hash(payload.password, 10);
     const hashedPassword = CryptoJS.SHA256(payload.password).toString();
     const response = await api.post('/api/auth/register', {
       ...payload,

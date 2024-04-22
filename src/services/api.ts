@@ -5,7 +5,8 @@ interface axiosParams {
 
 // Default config
 const params: axiosParams = {
-  baseUrl: import.meta.env.VITE_BACKEND_SERVER
+  //baseUrl: import.meta.env.VITE_BACKEND_SERVER //localserver
+  baseUrl: '/' //use producction
 };
 
 const axiosConfig: AxiosRequestConfig = {

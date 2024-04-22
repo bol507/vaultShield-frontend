@@ -64,8 +64,8 @@ const Signup = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="border rounded-md shadow-xl h-max w-max m-0 pb-4 px-4 dark:bg-zinc-900 dark:border-zinc-800 dark:text-white flex flex-col">
-        <div className="flex justify-evenly flex-col rounded-md dark:bg-zinc-700 h-[420px] mt-9 w-[420px]">
+      <div className="border rounded-md shadow-xl h-max w-11/12 md:w-4/12 m-0 pb-4 px-4 dark:bg-zinc-900 dark:border-zinc-800 dark:text-white flex flex-col">
+        <div className="flex justify-evenly flex-col rounded-md dark:bg-zinc-700 h-[420px] mt-9 w-full px-2">
           <div>
             <h2 className="dark:text-gray-100 text-lg">
               Create a VaultShield account

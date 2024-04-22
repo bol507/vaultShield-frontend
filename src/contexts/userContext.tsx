@@ -99,8 +99,12 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     const statusCode = response.status;
     if (statusCode === 201) {
       const token = response.data.token;
-      storageService.setToken(token); // Store the user token in local storage
-      logged();
+      if (token) {
+        storageService.setToken(token); // Store the user token in local storage
+        logged();
+      } else {
+        throw new Error('Missing token');
+      }
     } else {
       throw new Error(`Registration error. Status Code: ${statusCode}`);
     }
@@ -119,8 +123,12 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     const statusCode = response.status;
     if (statusCode === 200) {
       const token = response.data.token;
-      storageService.setToken(token); // Store the user token in local storage
-      logged();
+      if (token) {
+        storageService.setToken(token); // Store the user token in local storage
+        logged();
+      } else {
+        throw new Error('Missing token');
+      }
     } else {
       throw new Error(`Login error. Status code: ${statusCode}`);
     }
