@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useContext, useState } from 'react';
 import { ThemeContext } from 'contexts/themeContext';
 import { useTheme } from 'hooks/useTheme';
@@ -79,6 +80,7 @@ const DashboardLayout = () => {
           </ul>
         </div>
       </nav>
+      <Outlet />
     </div>
   );
 };

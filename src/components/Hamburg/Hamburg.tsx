@@ -1,5 +1,4 @@
 import { CloseMenuIcon, OpenMenuIcon } from 'components/svg/MenuIcon';
-import { useState } from 'react';
 
 const Hamburg = ({ handleMenu, menuOpen }) => {
   const handleClickMenu = () => {
