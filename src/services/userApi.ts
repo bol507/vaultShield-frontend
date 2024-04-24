@@ -2,6 +2,7 @@ import CryptoJS from 'crypto-js';
 
 import api from './api';
 import ws from 'utils/warningSelf';
+import storageService from './storage';
 
 export interface User {
   id?: number;
@@ -13,6 +14,12 @@ export interface User {
   keyword?: string;
   organization?: string;
 }
+
+const headers = {
+  Authorization: storageService.getToken()
+    ? `Bearer ${storageService.getToken().token}`
+    : null
+};
 
 const register = async (payload: User) => {
   try {
@@ -50,4 +57,18 @@ const login = async (credentials: User) => {
   }
 };
 
-export default { register, login };
+const getUser = async () => {
+  try {
+    const response = await api.get('/api/user', { headers });
+    return response;
+  } catch (err) {
+    console.info(
+      `%cError: ${ws.faceScreaming} %c${err.response.data.error}`,
+      ws.style1,
+      ws.style2
+    );
+    throw new Error(err.response.data.error);
+  }
+};
+
+export default { register, login, getUser };
