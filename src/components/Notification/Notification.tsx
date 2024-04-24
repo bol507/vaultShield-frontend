@@ -40,7 +40,7 @@ const Notification = () => {
   return (
     <div className="flex justify-center">
       <div
-        className={`border  rounded-md ${backgroundColor} ${borderColor} ${color} w-10/12 h-9 fixed top-4 `}
+        className={`border  rounded-md ${backgroundColor} ${borderColor} ${color} w-10/12 h-9 fixed top-6  z-[9999]`}
       >
         <div className="inline-flex items-start">{message}</div>
       </div>

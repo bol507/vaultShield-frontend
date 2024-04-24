@@ -1,12 +1,17 @@
-export function IconVaultShield() {
+import { SVGProps } from 'react';
+
+interface IconVaultShieldProps extends SVGProps<SVGSVGElement> {}
+
+export function IconVaultShield(props: IconVaultShieldProps) {
   return (
     <svg
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="221"
       height="48"
       fill="none"
       viewBox="0 0 221 48"
-      className="fill-cinder-800 w-44 dark:fill-cinder-100"
+      className={`fill-cinder-800 w-44 dark:fill-cinder-100 ${props.className}`}
     >
       <defs>
         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%" />

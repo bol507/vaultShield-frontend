@@ -12,6 +12,7 @@ import Login from 'components/Login';
 import Signup from 'components/Signup';
 import Notification from 'components/Notification';
 import Generator from 'components/Generator';
+import Loader from 'components/Loader';
 //contexts
 import { ThemeContext } from 'contexts/themeContext';
 //hooks
@@ -52,7 +53,7 @@ const App = () => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   let routes;

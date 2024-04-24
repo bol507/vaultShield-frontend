@@ -1,85 +1,84 @@
-import { useContext } from 'react';
-import { Outlet, Link, NavLink } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { ThemeContext } from 'contexts/themeContext';
 import { useTheme } from 'hooks/useTheme';
+import Hamburg from 'components/Hamburg';
+import { IconVaultShield } from 'components/svg/IconVaultShield';
+import { Outlet, Link, NavLink } from 'react-router-dom';
+
 import { SvgGear } from 'components/svg/SvgGear';
 import { SvgExit } from 'components/svg/SvgExit';
-import { ThemeContext } from 'contexts/themeContext';
+
 import ButtonSwitch from 'components/ButtonSwitch';
 import { dashboardMainCard, badgeMenuDashboard } from 'styles/tailwind.classes';
-import { IconVaultShield } from 'components/svg/IconVaultShield';
+
+import { CloseMenuIcon, OpenMenuIcon } from 'components/svg/MenuIcon';
+import { MagnifyingGlass } from 'components/svg/MagnifyingGlass';
+import { PersonRound } from 'components/svg/PersonRound';
+import SubMenu from 'components/SubMenu';
 
 const DashboardLayout = () => {
   const { theme } = useTheme();
   const { updateTheme } = useContext(ThemeContext);
+  // control menu sidebar
+  const [menuOpen, setMenuOpen] = useState(false);
+  //submenu Acctoun
+  const [subAccount, setSubAccount] = useState(false);
+
+  const elementsSubMenu = [
+    {
+      text: 'Settings account',
+      path: 'settings',
+      svg: <SvgGear width="16" height="16" />
+    },
+    {
+      text: 'Exit',
+      path: 'logout',
+      svg: <SvgExit width="16" height="16" />
+    }
+  ];
 
   const changeTheme = async () => {
     await updateTheme(theme === 'dark' ? '' : 'dark');
   };
+
+  const handleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+  const handleSubAccount = () => {
+    setSubAccount(!subAccount);
+    console.log(subAccount);
+  };
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className={dashboardMainCard}>
-        <div className="grid sm:grid-cols-5 h-full grid-cols-1 ">
-          {/* Side panel */}
-          <div className="sm:col-span-1 h-full sm:flex flex-col justify-around items-center px-2  hidden   ">
-            {/*  <div
-            className={`${badgeMenuDashboard} flex justify-center w-full`}
-          ></div> */}
-            <div
-              className={`${badgeMenuDashboard} h-full w-full flex flex-col items-center`}
-            >
-              <div className="flex items-center justify-center py-8">
-                <IconVaultShield />
+    <div className="flex flex-col justify-between h-full w-full z-0 ">
+      <nav className="bg-cinder-700 h-12 w-full flex justify-between items-center px-1 dark:text-white relative ">
+        <Hamburg handleMenu={handleMenu} menuOpen={menuOpen} />
+        <IconVaultShield className="hidden md:block" />
+        <MagnifyingGlass className="mr-4 block md:hidden" />
+
+        <div
+          className={`absolute w-full  p-0 m-0 left-0 top-12 h-max bg-cinder-800 flex-col ${menuOpen ? 'flex' : 'hidden'} md:hidden`}
+        >
+          <ul className="[&>li]:py-3 [&>li]:w-full w-full pt-3 pb-2">
+            <li className="w-full overflow-hidden flex items-center px-4">
+              <div className="relative rounded-full w-8 h-8 bg-cinder-500 flex items-center justify-center dark:text-white">
+                <span className="absolute top-[2px]">+</span>
               </div>
+              <span className="ml-1 dark:text-white"> New register</span>
+            </li>
 
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? 'w-full dark:bg-cinder-800 dark:bg-opacity-55 bg-cinder-700 bg-opacity-25 py-2 border-r-cinder-700 border-r-2 text-start pl-10'
-                    : ' py-2 w-full hover:bg-cinder-300 hover:bg-opacity-50 dark:hover:bg-cinder-800 dark:hover:bg-opacity-30 text-start pl-10'
-                }
-                to="/"
+            <li className="w-full relative   px-4">
+              <div
+                className="flex items-center pointer "
+                onClick={() => handleSubAccount()}
               >
-                My acounts
-              </NavLink>
-
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? 'w-full dark:bg-cinder-800 dark:bg-opacity-55 bg-cinder-700 bg-opacity-25 py-2 border-r-cinder-700 border-r-2  text-start pl-10'
-                    : 'py-2 w-full  hover:bg-cinder-300 hover:bg-opacity-50 dark:hover:bg-cinder-800 dark:hover:bg-opacity-30  text-start pl-10'
-                }
-                to="/generator"
-              >
-                Password generator
-              </NavLink>
-            </div>
-            <div className={`${badgeMenuDashboard} w-full`}>
-              <div className="flex pl-6  my-2">
-                <ButtonSwitch handleClick={changeTheme} />
+                <PersonRound />
+                <span className="ml-1">Account</span>
               </div>
-              <Link
-                className="flex justify-start items-center my-1 pl-4"
-                to="/settings"
-              >
-                <SvgGear />
-                <span className="ml-2">Settings</span>
-              </Link>
-
-              <Link
-                className="flex justify-start items-center mt-1 pl-4 mb-1"
-                to="/logout"
-              >
-                <SvgExit />
-                <span className="ml-2">Exit</span>
-              </Link>
-            </div>
-          </div>
-          {/* panel principal  */}
-          <div className="col-span-4 flex flex-col pt-14">
-            <Outlet />
-          </div>
+            </li>
+            {subAccount && <SubMenu elements={elementsSubMenu} />}
+          </ul>
         </div>
-      </div>
+      </nav>
     </div>
   );
 };
