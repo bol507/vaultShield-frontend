@@ -9,16 +9,16 @@ interface Token {
  * @param {Token} token - The token to store.
  * @returns {void}
  */
-const setToken = (token: Token): void => {
-  localStorage.setItem(KEY, JSON.stringify(token));
+const setToken = async (token: Token): Promise<void> => {
+  await localStorage.setItem(KEY, JSON.stringify(token));
 };
 
 /**
  * Retrieves the token from local storage.
  * @returns {Token|null} - The stored token, or null if none exists.
  */
-const getToken = (): Token | null => {
-  const tokenString = localStorage.getItem(KEY);
+const getToken = async (): Promise<Token | null> => {
+  const tokenString = await localStorage.getItem(KEY);
   return tokenString ? JSON.parse(tokenString) : null;
 };
 
@@ -26,8 +26,8 @@ const getToken = (): Token | null => {
  * Removes the token from local storage.
  * @returns {void}
  */
-const removeToken = (): void => {
-  localStorage.removeItem(KEY);
+const removeToken = async (): Promise<void> => {
+  await localStorage.removeItem(KEY);
 };
 
 export default {

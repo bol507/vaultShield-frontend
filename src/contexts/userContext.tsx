@@ -37,6 +37,7 @@ interface UserContextType {
   addUser: (newUser: User) => Promise<void>;
   loginUser: (credentials: User) => Promise<void>;
   logged: () => void;
+  getUser: () => PPromise<void>;
 }
 /**
  * Represents the initial user state.
@@ -75,7 +76,8 @@ export const UserContext: React.Context<UserContextType> = createContext({
   userDispatch: () => {},
   addUser: async () => {},
   loginUser: async () => {},
-  logged: () => {}
+  logged: () => {},
+  getUser: () => {}
 });
 
 // UserContextProvider component
@@ -124,8 +126,9 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     if (statusCode === 200) {
       const token = response.data.token;
       if (token) {
-        storageService.setToken(token); // Store the user token in local storage
+        await storageService.setToken(token); // Store the user token in local storage
         logged();
+        await getUser();
       } else {
         throw new Error('Missing token');
       }
@@ -142,6 +145,15 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     userDispatch({ type: 'LOGGED' }); // Dispatch the 'LOGGED' action to update the state
   };
 
+  const getUser = async (): Promise<void> => {
+    const response = await userService.getUser();
+    const statusCode = response.status;
+    if (statusCode === 200) {
+      const user = response.data;
+      userDispatch({ type: 'ADD_USER', user: user });
+    }
+  };
+
   // Create the context value object
   /**
    * The context value for the user context.
@@ -152,7 +164,8 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     userDispatch,
     addUser,
     loginUser,
-    logged
+    logged,
+    getUser
   };
 
   // Render the UserContextProvider with the context value and child components

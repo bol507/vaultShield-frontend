@@ -15,10 +15,12 @@ export interface User {
   organization?: string;
 }
 
-const headers = {
-  Authorization: storageService.getToken()
-    ? `Bearer ${storageService.getToken().token}`
-    : null
+const getHeadersWithToken = async () => {
+  const token = await storageService.getToken();
+  const headers = {
+    Authorization: token ? `Bearer ${token}` : null
+  };
+  return headers;
 };
 
 const register = async (payload: User) => {
@@ -59,6 +61,8 @@ const login = async (credentials: User) => {
 
 const getUser = async () => {
   try {
+    const headers = await getHeadersWithToken();
+    console.log(headers);
     const response = await api.get('/api/user', { headers });
     return response;
   } catch (err) {
