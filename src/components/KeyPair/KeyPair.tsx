@@ -2,10 +2,12 @@ import forge from 'node-forge';
 import { useContext, useEffect, useState } from 'react';
 
 import { NotificationContext } from 'contexts/notificationContext';
+import { KeyPairContext } from 'contexts/keypairContext';
 
 const KeyPair = () => {
   const [keyPair, setKeyPair] = useState(null);
   const { showNotification } = useContext(NotificationContext);
+  const { keypairDispatch } = useContext(KeyPairContext);
 
   const handleGenerateKeyPair = async () => {
     const rsa = forge.pki.rsa;
@@ -19,6 +21,11 @@ const KeyPair = () => {
       });
     });
     setKeyPair(kp);
+    keypairDispatch({
+      type: 'SET_KEY_PAIR',
+      privateKey: kp.privateKey,
+      publicKey: kp.publicKey
+    });
   };
 
   useEffect(() => {

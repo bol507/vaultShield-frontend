@@ -14,7 +14,6 @@ interface KeyPairAction {
 interface KeyPairContextType {
   keypairState: KeyPairState;
   keypairDispatch: Dispatch<KeyPairAction>;
-  setKeyPair: (privateKey: string, publicKey: string) => void;
 }
 
 const initialKeyPairState = {
@@ -36,8 +35,7 @@ const keyPairReducer = (state: KeyPairState, action: KeyPairAction) => {
 
 export const KeyPairContext = createContext<KeyPairContextType>({
   keypairState: initialKeyPairState,
-  keypairDispatch: () => {},
-  setKeyPair: () => {}
+  keypairDispatch: () => {}
 });
 
 export const KeyPairContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -48,22 +46,11 @@ export const KeyPairContextProvider: React.FC<{ children: React.ReactNode }> = (
     initialKeyPairState
   );
 
-  const setKeyPair = async (
-    privateKey: string,
-    publicKey: string
-  ): Promise<void> => {
-    const action: KeyPairAction = {
-      type: 'SET_KEY_PAIR',
-      privateKey,
-      publicKey
-    };
-    keypairDispatch(action);
-  };
+  c;
 
   const contextValue: KeyPairContextType = {
     keypairState,
-    keypairDispatch,
-    setKeyPair
+    keypairDispatch
   };
 
   return (
