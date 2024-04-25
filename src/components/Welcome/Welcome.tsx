@@ -5,6 +5,7 @@
 //import { badgeMenuDashboard } from 'styles/tailwind.classes';
 //hooks
 import { useUser } from 'hooks/useUser';
+//components
 import KeyPair from 'components/KeyPair';
 
 const Welcome = () => {
