@@ -104,6 +104,7 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
       if (token) {
         storageService.setToken(token); // Store the user token in local storage
         logged();
+        await getUser();
       } else {
         throw new Error('Missing token');
       }

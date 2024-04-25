@@ -8,7 +8,7 @@ import HomeLayout from 'layouts/HomeLayout';
 import Home from 'pages/Home';
 import Dashboard from 'pages/Dashboard';
 //components
-import Login from 'components/Login';
+import Login from 'components/login';
 import Signup from 'components/Signup';
 import Notification from 'components/Notification';
 import Generator from 'components/Generator';

@@ -11,6 +11,10 @@ const Welcome = () => {
   return (
     <div className="mt-4 dark:text-white">
       <h1>Welcome! {user?.username}</h1>
+      <p>
+        For better use of the application we need to create keys that will help
+        us encrypt the information
+      </p>
     </div>
   );
 };
