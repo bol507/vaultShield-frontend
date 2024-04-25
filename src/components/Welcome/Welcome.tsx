@@ -5,6 +5,7 @@
 //import { badgeMenuDashboard } from 'styles/tailwind.classes';
 //hooks
 import { useUser } from 'hooks/useUser';
+import KeyPair from 'components/KeyPair';
 
 const Welcome = () => {
   const { user } = useUser();
@@ -15,6 +16,7 @@ const Welcome = () => {
         For better use of the application we need to create keys that will help
         us encrypt the information
       </p>
+      <KeyPair />
     </div>
   );
 };
