@@ -30,4 +30,19 @@ const getKeyPair = async () => {
   }
 };
 
-export default { getKeyPair };
+const registerKeyPair = async (payload: KeyPair) => {
+  try {
+    const headers = await getHeadersWithToken();
+    const response = await api.post('/api/keypair', payload, { headers });
+    return response;
+  } catch (err) {
+    console.info(
+      `%cError: ${ws.faceScreaming} %c${err.response.data.error}`,
+      ws.style1,
+      ws.style2
+    );
+    throw new Error(err.response.data.error);
+  }
+};
+
+export default { getKeyPair, registerKeyPair };

@@ -1,4 +1,5 @@
 import React, { Dispatch, createContext, useReducer } from 'react';
+import keypairService from 'services/keypairApi';
 
 interface KeyPairState {
   privateKey: string;
@@ -14,6 +15,7 @@ interface KeyPairAction {
 interface KeyPairContextType {
   keypairState: KeyPairState;
   keypairDispatch: Dispatch<KeyPairAction>;
+  getKeyPair: () => Promise<void>;
 }
 
 const initialKeyPairState = {
@@ -35,7 +37,8 @@ const keyPairReducer = (state: KeyPairState, action: KeyPairAction) => {
 
 export const KeyPairContext = createContext<KeyPairContextType>({
   keypairState: initialKeyPairState,
-  keypairDispatch: () => {}
+  keypairDispatch: () => {},
+  getKeyPair: async () => {}
 });
 
 export const KeyPairContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -46,9 +49,19 @@ export const KeyPairContextProvider: React.FC<{ children: React.ReactNode }> = (
     initialKeyPairState
   );
 
+  const getKeyPair = async (): Promise<void> => {
+    const response = await keypairService.getKeyPair();
+    const statusCode = response.status;
+    if (statusCode !== 200) {
+      throw new Error('Do not have keys');
+    }
+    console.log(response.data);
+  };
+
   const contextValue: KeyPairContextType = {
     keypairState,
-    keypairDispatch
+    keypairDispatch,
+    getKeyPair
   };
 
   return (

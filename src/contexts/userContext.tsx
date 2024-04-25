@@ -37,7 +37,7 @@ interface UserContextType {
   addUser: (newUser: User) => Promise<void>;
   loginUser: (credentials: User) => Promise<void>;
   logged: () => void;
-  getUser: () => PPromise<void>;
+  getUser: () => Promise<void>;
 }
 /**
  * Represents the initial user state.
