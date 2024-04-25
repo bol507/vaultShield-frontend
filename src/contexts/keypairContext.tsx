@@ -46,8 +46,6 @@ export const KeyPairContextProvider: React.FC<{ children: React.ReactNode }> = (
     initialKeyPairState
   );
 
-  c;
-
   const contextValue: KeyPairContextType = {
     keypairState,
     keypairDispatch

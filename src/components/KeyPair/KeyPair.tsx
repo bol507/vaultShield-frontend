@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { NotificationContext } from 'contexts/notificationContext';
 import { KeyPairContext } from 'contexts/keypairContext';
+import { btnDefault } from 'styles/tailwind.classes';
 
 const KeyPair = () => {
   const [keyPair, setKeyPair] = useState(null);
@@ -39,7 +40,9 @@ const KeyPair = () => {
 
   return (
     <div>
-      <button onClick={() => handleGenerateKeyPair()}>Generate Key Pair</button>
+      <button className={btnDefault} onClick={() => handleGenerateKeyPair()}>
+        Generate Key Pair
+      </button>
     </div>
   );
 };

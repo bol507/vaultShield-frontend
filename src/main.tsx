@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { UserContextProvider } from 'contexts/userContext';
 import { ThemeContextProvider } from 'contexts/themeContext';
 import { NotificationContextProvider } from 'context/notificationContext';
+import { KeyPairContextProvider } from 'contexts/keypairContext';
 
 import App from './App';
 import './index.css';
@@ -14,9 +15,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <UserContextProvider>
       <ThemeContextProvider>
         <NotificationContextProvider>
-          <Router>
-            <App />
-          </Router>
+          <KeyPairContextProvider>
+            <Router>
+              <App />
+            </Router>
+          </KeyPairContextProvider>
         </NotificationContextProvider>
       </ThemeContextProvider>
     </UserContextProvider>
