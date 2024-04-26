@@ -102,7 +102,7 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     if (statusCode === 201) {
       const token = response.data.token;
       if (token) {
-        storageService.setToken(token); // Store the user token in local storage
+        await storageService.setToken(token); // Store the user token in local storage
         logged();
         await getUser();
       } else {
@@ -111,8 +111,6 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     } else {
       throw new Error(`Registration error. Status Code: ${statusCode}`);
     }
-
-    return Promise.resolve();
   };
 
   // Function to log in a user

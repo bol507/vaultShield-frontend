@@ -7,17 +7,9 @@ export interface KeyPair {
   publicKey: string;
 }
 
-const getHeadersWithToken = async () => {
-  const token = await storageService.getToken();
-  const headers = {
-    Authorization: token ? `Bearer ${token}` : null
-  };
-  return headers;
-};
-
 const getKeyPair = async () => {
   try {
-    const headers = await getHeadersWithToken();
+    const headers = await storageService.getHeadersWithToken();
     const response = await api.get('/api/keypair', { headers });
     return response;
   } catch (err) {
@@ -32,7 +24,7 @@ const getKeyPair = async () => {
 
 const registerKeyPair = async (payload: KeyPair) => {
   try {
-    const headers = await getHeadersWithToken();
+    const headers = await storageService.getHeadersWithToken();
     const response = await api.post('/api/keypair', payload, { headers });
     return response;
   } catch (err) {

@@ -56,7 +56,7 @@ const Signup = () => {
     } catch (err) {
       if (err instanceof Error) setErrors({ error: err.message });
       showNotification({
-        message: 'Error in registration!',
+        message: `Error in registration! ${err.message}`,
         variant: 'danger'
       });
     }

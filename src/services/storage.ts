@@ -30,8 +30,23 @@ const removeToken = async (): Promise<void> => {
   await localStorage.removeItem(KEY);
 };
 
+/**
+ * Gets the headers with the authentication token.
+ * @returns {Promise<{ [key: string]: string }|null>}
+ */
+const getHeadersWithToken = async (): Promise<{
+  [key: string]: string;
+} | null> => {
+  const token = await getToken();
+  const headers = {
+    Authorization: token ? `Bearer ${token.value}` : null
+  };
+  return headers;
+};
+
 export default {
   setToken,
   getToken,
-  removeToken
+  removeToken,
+  getHeadersWithToken
 };
