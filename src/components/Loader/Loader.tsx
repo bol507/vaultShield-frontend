@@ -1,6 +1,12 @@
-import React from 'react';
+import { useLoader } from 'hooks/useLoader';
 
-const Loader = () => {
+const Loader: React.FC = () => {
+  const { isLoading } = useLoader();
+
+  if (!isLoading) {
+    return null;
+  }
+
   return (
     <div className="loader-container">
       <div className="loader"></div>

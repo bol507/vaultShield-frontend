@@ -39,7 +39,7 @@ const getHeadersWithToken = async (): Promise<{
 } | null> => {
   const token = await getToken();
   const headers = {
-    Authorization: token ? `Bearer ${token.value}` : null
+    Authorization: token ? `Bearer ${token}` : null
   };
   return headers;
 };

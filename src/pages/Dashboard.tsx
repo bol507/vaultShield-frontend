@@ -1,23 +1,27 @@
-import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+//components
 import Welcome from 'components/Welcome';
-import { KeyPairContext } from 'contexts/keypairContext';
-import { useKeyPair } from 'hooks/useKeyPair';
+//hooks
+import { useUser } from 'hooks/useUser';
+import { btnDefault } from 'styles/tailwind.classes';
 
 const Dashboard = () => {
-  const { getKeyPair } = useContext(KeyPairContext);
-  const { publicKey } = useKeyPair();
-  const hasPublicKey = Boolean(publicKey);
+  const { isKeyPair } = useUser();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    getKeyPair();
-  }, []);
-  if (!hasPublicKey) {
+  const handleButton = () => {
+    navigate('/NewRegister');
+  };
+
+  if (!isKeyPair) {
     return <Welcome />;
   }
 
   return (
     <div>
-      <h1>hola</h1>
+      <button className={btnDefault} onClick={() => handleButton()}>
+        Create new
+      </button>
     </div>
   );
 };

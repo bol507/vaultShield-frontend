@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { validateForm } from 'utils/validations';
 import { btnDefault } from 'styles/tailwind.classes';
-import InputBase from 'components/InputBase';
+import InputBase from 'components/Inputs/InputBase';
 import { UserContext } from 'contexts/userContext';
 import { NotificationContext } from 'contexts/notificationContext';
 

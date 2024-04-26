@@ -1,5 +1,5 @@
 import { btnDefault } from 'styles/tailwind.classes';
-import InputBase from '../InputBase';
+import InputBase from '../Inputs/InputBase';
 import { useState, useContext } from 'react';
 import { UserContext } from 'contexts/userContext';
 import { validateForm } from 'utils/validations';
@@ -44,7 +44,7 @@ const Login = () => {
       if (!errorsForm.email && !errorsForm.password) {
         await loginUser(infoUser);
         showNotification({
-          message: 'Logind successfuly!',
+          message: 'Login successfuly!',
           variant: 'success'
         });
         navigate('/');

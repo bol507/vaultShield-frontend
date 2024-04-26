@@ -11,6 +11,7 @@ import storageService from 'services/storage';
 interface UserState {
   user: User | null;
   isLogged: boolean;
+  isKeyPair: boolean;
 }
 
 /**
@@ -19,7 +20,7 @@ interface UserState {
  * @property {User} user - The user object related to the action.
  */
 interface UserAction {
-  type: 'ADD_USER' | 'LOGGED';
+  type: 'ADD_USER' | 'LOGGED' | 'HAVE_KEYPAIR';
   user: User;
 }
 /**
@@ -45,7 +46,8 @@ interface UserContextType {
  */
 const initialUserState: UserState = {
   user: null,
-  isLogged: false //change this for development
+  isLogged: false, //change this for development
+  isKeyPair: false
 };
 
 // Reducer function to handle user actions and update state
@@ -61,6 +63,8 @@ const userReducer = (state: UserState, action: UserAction): UserState => {
       return { ...state, user: action.user };
     case 'LOGGED':
       return { ...state, isLogged: true };
+    case 'HAVE_KEYPAIR':
+      return { ...state, isKeyPair: true };
     default:
       return state;
   }
@@ -126,8 +130,8 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
       const token = response.data.token;
       if (token) {
         await storageService.setToken(token); // Store the user token in local storage
-        logged();
         await getUser();
+        logged();
       } else {
         throw new Error('Missing token');
       }
@@ -150,6 +154,9 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     if (statusCode === 200) {
       const user = response.data;
       userDispatch({ type: 'ADD_USER', user: user });
+      if (user.keypair && user.keypair.length > 0) {
+        userDispatch({ type: 'HAVE_KEYPAIR' });
+      }
     }
   };
 

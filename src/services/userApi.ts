@@ -54,7 +54,6 @@ const login = async (credentials: User) => {
 const getUser = async () => {
   try {
     const headers = await storageService.getHeadersWithToken();
-    console.log(headers);
     const response = await api.get('/api/user', { headers });
     return response;
   } catch (err) {

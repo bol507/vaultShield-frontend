@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import './App.css';
 //layouts
 import DashboardLayout from 'layouts/DashboardLayout';
@@ -11,10 +11,10 @@ import Dashboard from 'pages/Dashboard';
 import Login from 'components/login';
 import Signup from 'components/Signup';
 import Notification from 'components/Notification';
-import Generator from 'components/Generator';
-import Loader from 'components/Loader';
+import RegisterForm from 'components/RegisterForm';
 //contexts
 import { ThemeContext } from 'contexts/themeContext';
+import { LoaderProvider } from 'contexts/loaderContext';
 //hooks
 import { useUser } from 'hooks/useUser';
 
@@ -22,12 +22,8 @@ const App = () => {
   const { updateTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const { isLogged } = useUser();
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (isLogged !== undefined) {
-      setIsLoading(false);
-    }
     if (isLogged) {
       navigate('/');
     }
@@ -52,17 +48,13 @@ const App = () => {
     asignTheme();
   }, []);
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   let routes;
   if (isLogged) {
     routes = null;
     routes = (
       <Route path="/" element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
-        <Route path="/generator" element={<Generator />} />
+        <Route path="/NewRegister" element={<RegisterForm />} />
       </Route>
     );
   } else {
@@ -78,9 +70,11 @@ const App = () => {
 
   return (
     <>
-      <Notification />
+      <LoaderProvider>
+        <Notification />
 
-      <Routes>{routes}</Routes>
+        <Routes>{routes}</Routes>
+      </LoaderProvider>
     </>
   );
 };
