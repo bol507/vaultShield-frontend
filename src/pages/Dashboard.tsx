@@ -11,7 +11,15 @@ const Dashboard = () => {
   useEffect(() => {
     getKeyPair();
   }, []);
-  return <>{hasPublicKey ? <p>has key</p> : <Welcome />}</>;
+  if (!hasPublicKey) {
+    return <Welcome />;
+  }
+
+  return (
+    <div>
+      <h1>hola</h1>
+    </div>
+  );
 };
 
 export default Dashboard;

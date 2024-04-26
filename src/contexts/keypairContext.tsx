@@ -1,5 +1,5 @@
 import React, { Dispatch, createContext, useReducer } from 'react';
-import keypairService from 'services/keypairApi';
+import keypairService, { KeyPair } from 'services/keypairApi';
 
 interface KeyPairState {
   privateKey: string;
@@ -16,6 +16,7 @@ interface KeyPairContextType {
   keypairState: KeyPairState;
   keypairDispatch: Dispatch<KeyPairAction>;
   getKeyPair: () => Promise<void>;
+  registerKeyPair: (payload: KeyPair) => Promise<void>;
 }
 
 const initialKeyPairState = {
@@ -38,7 +39,8 @@ const keyPairReducer = (state: KeyPairState, action: KeyPairAction) => {
 export const KeyPairContext = createContext<KeyPairContextType>({
   keypairState: initialKeyPairState,
   keypairDispatch: () => {},
-  getKeyPair: async () => {}
+  getKeyPair: async () => {},
+  registerKeyPair: async () => {}
 });
 
 export const KeyPairContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -55,13 +57,31 @@ export const KeyPairContextProvider: React.FC<{ children: React.ReactNode }> = (
     if (statusCode !== 200) {
       throw new Error('Do not have keys');
     }
-    console.log(response.data);
+    //console.log(response.data);
+    keypairDispatch({
+      type: 'SET_KEY_PAIR',
+      privateKey: response.data.private,
+      publicKey: response.data.public
+    });
+  };
+
+  const registerKeyPair = async (payload: KeyPair): Promise<void> => {
+    const response = await keypairService.registerKeyPair(payload);
+    const statusCode = response.status;
+    if (statusCode === 201) {
+      keypairDispatch({
+        type: 'SET_KEY_PAIR',
+        privateKey: payload.privateKey,
+        publicKey: payload.publicKey
+      });
+    }
   };
 
   const contextValue: KeyPairContextType = {
     keypairState,
     keypairDispatch,
-    getKeyPair
+    getKeyPair,
+    registerKeyPair
   };
 
   return (

@@ -21,11 +21,13 @@ const KeyPair = () => {
         }
       });
     });
+    const privateKeyPem = forge.pki.privateKeyToPem(kp.privateKey);
+    const publicKeyPem = forge.pki.publicKeyToPem(kp.publicKey);
     setKeyPair(kp);
     keypairDispatch({
       type: 'SET_KEY_PAIR',
-      privateKey: kp.privateKey,
-      publicKey: kp.publicKey
+      privateKey: privateKeyPem,
+      publicKey: publicKeyPem
     });
   };
 
