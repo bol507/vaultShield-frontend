@@ -20,6 +20,10 @@ export const wrapperInputBorderBottom = `
 self-center flex flex-col items-start border-b-2  border-cinder-900 hover:border-cinder-800  w-3/4 
 `;
 
+export const wrapperInputBorderBottomMd = `
+flex justify-center flex-nowrap items-center self-center w-3/4 md:w-4/12
+`;
+
 export const inputTransparent = `
 appearance-none bg-transparent border-none w-full dark:text-gray-100 leading-tight focus:outline-none
 `;
