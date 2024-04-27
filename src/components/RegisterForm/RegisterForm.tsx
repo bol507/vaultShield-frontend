@@ -8,7 +8,7 @@ import { SvgHiddenPassword } from 'components/svg/SvgHiddenPassword';
 const RegisterForm = () => {
   const [form, setForm] = useState({
     title: '',
-    login: '',
+    log: '',
     password: '',
     website: '',
     notes: ''
@@ -51,12 +51,9 @@ const RegisterForm = () => {
 
       <p className="self-center w-3/4 md:w-4/12 text-left ">New record</p>
 
-      {/* bypass browser autocomplete */}
-      <input style={{ visibility: 'hidden' }} type="text" />
-      <input style={{ visibility: 'hidden' }} type="password" />
       {/* Title */}
       <div className="flex justify-center flex-nowrap items-center self-center w-3/4 md:w-4/12">
-        <div className="self-center flex flex-col items-start border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
+        <div className="self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
           <label className="block dark:text-gray-100 text-sm mb-2 ">
             Title
           </label>
@@ -71,17 +68,17 @@ const RegisterForm = () => {
 
       {/* Login */}
       <div className="flex justify-center flex-nowrap items-center self-center w-3/4 md:w-4/12">
-        <div className="self-center flex flex-col items-start border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
+        <div className="self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
           <label className="block dark:text-gray-100 text-sm mb-2 ">
             Login
           </label>
           <input
             type="text"
-            value={form.login}
+            value={form.log}
             autoComplete="off"
             name="u1"
             className="w-full appearance-none bg-transparent dark:text-gray-100 leading-tight focus:outline-none  "
-            onChange={(e) => setForm({ ...form, login: e.target.value })}
+            onChange={(e) => setForm({ ...form, log: e.target.value })}
           />
         </div>
       </div>
@@ -95,9 +92,9 @@ const RegisterForm = () => {
             <input
               type={toggleView ? 'text' : 'password'}
               value={form.password}
-              autoComplete="off"
+              autoComplete="new-password"
               name="p1"
-              className="w-full appearance-none bg-transparent dark:text-gray-100 leading-tight focus:outline-none border-b-2  border-cinder-900 hover:border-cinder-800 "
+              className="w-full appearance-none bg-transparent dark:text-gray-100 leading-tight focus:outline-none hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800 "
             />
             {toggleView ? (
               <SvgViewPassword onClick={() => setToggleView(!toggleView)} />
@@ -111,7 +108,7 @@ const RegisterForm = () => {
 
       {/* Website */}
       <div className="flex justify-center flex-nowrap items-center self-center w-3/4 md:w-4/12">
-        <div className="self-center flex flex-col items-start border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
+        <div className="self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
           <label className="block dark:text-gray-100 text-sm mb-2 ">
             Website
           </label>
@@ -124,7 +121,7 @@ const RegisterForm = () => {
         </div>
       </div>
 
-      <div className="self-center flex flex-col items-start border-b-2  border-cinder-900 hover:border-cinder-800  w-3/4 md:w-4/12">
+      <div className="self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-3/4 md:w-4/12">
         <label className="block dark:text-gray-100 text-sm mb-2">Notes</label>
         <textarea
           class="mt-2 block w-full self-center appearance-none bg-zinc-700 border-zinc-900 shadow-lg  dark:text-gray-100 leading-tight "
