@@ -5,6 +5,7 @@ import { UserContextProvider } from 'contexts/userContext';
 import { ThemeContextProvider } from 'contexts/themeContext';
 import { NotificationContextProvider } from 'context/notificationContext';
 import { KeyPairContextProvider } from 'contexts/keypairContext';
+import { RegisterContextProvider } from 'contexts/registerContext';
 
 import App from './App';
 import './index.css';
@@ -16,9 +17,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <ThemeContextProvider>
         <NotificationContextProvider>
           <KeyPairContextProvider>
-            <Router>
-              <App />
-            </Router>
+            <RegisterContextProvider>
+              <Router>
+                <App />
+              </Router>
+            </RegisterContextProvider>
           </KeyPairContextProvider>
         </NotificationContextProvider>
       </ThemeContextProvider>

@@ -48,7 +48,7 @@ const Signup = () => {
         };
         await addUser(newUser);
         showNotification({
-          message: 'Registration successfuly!',
+          message: 'Registration successful!',
           variant: 'success'
         });
         navigate('/');

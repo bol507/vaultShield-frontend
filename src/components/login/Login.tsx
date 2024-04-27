@@ -44,7 +44,7 @@ const Login = () => {
       if (!errorsForm.email && !errorsForm.password) {
         await loginUser(infoUser);
         showNotification({
-          message: 'Login successfuly!',
+          message: 'Login successful!',
           variant: 'success'
         });
         navigate('/');
