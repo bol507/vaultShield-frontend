@@ -11,6 +11,8 @@ interface InputBaseProps {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   readOnly?: boolean;
   alignment?: string;
+  autoComplete?: string;
+  name?: string;
 }
 
 const InputBase = ({
@@ -20,7 +22,9 @@ const InputBase = ({
   value,
   onChange,
   readOnly,
-  alignment
+  alignment,
+  autoComplete,
+  name
 }: InputBaseProps) => {
   return (
     <div className={wrapperInputBorderBottom}>
@@ -32,6 +36,8 @@ const InputBase = ({
         value={value}
         onChange={onChange}
         readOnly={readOnly}
+        autoComplete={autoComplete}
+        name={name}
       />
     </div>
   );
