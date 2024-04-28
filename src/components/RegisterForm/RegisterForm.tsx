@@ -1,13 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import forge from 'node-forge';
+
 //contexts
 import { KeyPairContext } from 'contexts/keypairContext';
 import { RegisterContext } from 'contexts/registerContext';
 import { NotificationContext } from 'contexts/notificationContext';
 //hooks
 import { useKeyPair } from 'hooks/useKeyPair';
+//utils
+import { encrypt } from 'utils/encriptation';
 //Svgs
 import { SvgRefresh } from 'components/svg/SvgRefresh';
 import { SvgViewPassword } from 'components/svg/SvgViewPassword';
@@ -23,7 +25,7 @@ const RegisterForm = () => {
   });
   const navigate = useNavigate();
   const [toggleView, setToggleView] = useState(false);
-  const { publicKey, privateKey } = useKeyPair();
+  const { publicKey } = useKeyPair();
   const { getKeyPair } = useContext(KeyPairContext);
   const { createRegister } = useContext(RegisterContext);
   const { showNotification } = useContext(NotificationContext);
@@ -56,7 +58,7 @@ const RegisterForm = () => {
   };
 
   const handleButtonSave = async () => {
-    const enc = encrypt();
+    const enc = encrypt(publicKey, form.password);
     const updatedForm = { ...form, password: enc };
     await createRegister(updatedForm);
     setForm({
@@ -70,23 +72,6 @@ const RegisterForm = () => {
       message: 'Registration successful!',
       variant: 'success'
     });
-  };
-
-  const encrypt = () => {
-    const pk = forge.pki.publicKeyFromPem(publicKey);
-    const passwordBytes = forge.util.encodeUtf8(form.password);
-    const encryptedBytes = pk.encrypt(passwordBytes);
-    const encryptedPassword = forge.util.encode64(encryptedBytes);
-    return encryptedPassword;
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const decrypt = (value) => {
-    const pk = forge.pki.privateKeyFromPem(privateKey);
-    const encryptedBytes = forge.util.decode64(value);
-    const decryptedBytes = pk.decrypt(encryptedBytes);
-    const decryptedPassword = forge.util.decodeUtf8(decryptedBytes);
-    return decryptedPassword;
   };
 
   return (

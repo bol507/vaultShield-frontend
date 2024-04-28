@@ -24,6 +24,22 @@ const createRegister = async (payload: Register) => {
   }
 };
 
+const getRegisters = async () => {
+  try {
+    const headers = await storageService.getHeadersWithToken();
+    const response = await api.get('/api/register', { headers });
+    return response;
+  } catch (err) {
+    console.info(
+      `%cError: ${ws.faceScreaming} %c${err.response.data.error}`,
+      ws.style1,
+      ws.style2
+    );
+    throw new Error(err.response.data.error);
+  }
+};
+
 export default {
-  createRegister
+  createRegister,
+  getRegisters
 };

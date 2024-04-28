@@ -3,17 +3,20 @@ import registerService, { Register } from 'services/registerApi';
 
 interface RegisterState {
   register: Register | null;
+  registers: Register[];
 }
 
 interface RegisterAction {
   type: 'SET_REGISTER';
   register: Register;
+  registers: Register[];
 }
 
 interface RegisterContextType {
   registerState: RegisterState;
   registerDispatch: Dispatch<RegisterAction>;
   createRegister: (payload: Register) => Promise<void>;
+  getRegisters: () => Promise<void>;
 }
 
 const initialRegisterState = {
@@ -27,6 +30,11 @@ const registerReducer = (state: RegisterState, action: RegisterAction) => {
         ...state,
         register: action.register
       };
+    case 'SET_REGISTERS':
+      return {
+        ...state,
+        registers: action.registers
+      };
     default:
       return state;
   }
@@ -36,7 +44,8 @@ export const RegisterContext: React.Context<RegisterContextType> =
   createContext({
     registerState: initialRegisterState,
     registerDispatch: () => {},
-    createRegister: async () => {}
+    createRegister: async () => {},
+    getRegisters: async () => {}
   });
 
 export const RegisterContextProvider: React.FC<{
@@ -58,10 +67,22 @@ export const RegisterContextProvider: React.FC<{
     }
   };
 
+  const getRegisters = async (): Promise<void> => {
+    const response = await registerService.getRegisters();
+    const statusCode = response.status;
+    if (statusCode === 200) {
+      registerDispatch({
+        type: 'SET_REGISTERS',
+        registers: response.data.registers
+      });
+    }
+  };
+
   const contextValue: RegisterContextType = {
     registerState,
     registerDispatch,
-    createRegister
+    createRegister,
+    getRegisters
   };
 
   return (
