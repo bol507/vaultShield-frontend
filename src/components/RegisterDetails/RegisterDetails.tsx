@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 //contexts
@@ -62,6 +63,8 @@ const RegisterDetails = () => {
     navigate('/');
   };
   const handleButtonSave = () => {};
+  const handleButtonEdit = () => {};
+  const handleButtonDelete = () => {};
 
   return (
     <div>
@@ -76,9 +79,15 @@ const RegisterDetails = () => {
             </button>
             <button
               className="self-center w-auto rounded-lg text-center bg-cinder-500  hover:bg-cinder-600 my-4 py-1 px-[8px] text-gray-100"
-              onClick={() => handleButtonSave()}
+              onClick={() => handleButtonEdit()}
             >
               Edit
+            </button>
+            <button
+              className="self-center w-auto rounded-lg text-center bg-cinder-500  hover:bg-cinder-600 my-4 py-1 px-[8px] text-gray-100"
+              onClick={() => handleButtonDelete()}
+            >
+              Delete
             </button>
           </div>
 

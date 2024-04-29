@@ -13,6 +13,7 @@ import Signup from 'components/Signup';
 import Notification from 'components/Notification';
 import RegisterForm from 'components/RegisterForm';
 import RegisterDetails from 'components/RegisterDetails';
+import Logout from 'components/Logout';
 //contexts
 import { ThemeContext } from 'contexts/themeContext';
 import { LoaderProvider } from 'contexts/loaderContext';
@@ -57,6 +58,7 @@ const App = () => {
         <Route index element={<Dashboard />} />
         <Route path="/NewRegister" element={<RegisterForm />} />
         <Route path="/RegisterDetails/:id" element={<RegisterDetails />} />
+        <Route path="/logout" element={<Logout />} />
       </Route>
     );
   } else {

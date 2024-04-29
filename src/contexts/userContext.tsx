@@ -20,7 +20,7 @@ interface UserState {
  * @property {User} user - The user object related to the action.
  */
 interface UserAction {
-  type: 'ADD_USER' | 'LOGGED' | 'HAVE_KEYPAIR';
+  type: 'ADD_USER' | 'LOGGED' | 'HAVE_KEYPAIR' | 'LOGOFF';
   user: User;
 }
 /**
@@ -39,6 +39,7 @@ interface UserContextType {
   loginUser: (credentials: User) => Promise<void>;
   logged: () => void;
   getUser: () => Promise<void>;
+  logoff: () => void;
 }
 /**
  * Represents the initial user state.
@@ -65,6 +66,8 @@ const userReducer = (state: UserState, action: UserAction): UserState => {
       return { ...state, isLogged: true };
     case 'HAVE_KEYPAIR':
       return { ...state, isKeyPair: true };
+    case 'LOGOFF':
+      return { ...state, isLogged: false };
     default:
       return state;
   }
@@ -81,7 +84,8 @@ export const UserContext: React.Context<UserContextType> = createContext({
   addUser: async () => {},
   loginUser: async () => {},
   logged: () => {},
-  getUser: () => {}
+  getUser: () => {},
+  logoff: () => {}
 });
 
 // UserContextProvider component
@@ -148,6 +152,10 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     userDispatch({ type: 'LOGGED' }); // Dispatch the 'LOGGED' action to update the state
   };
 
+  const logoff = () => {
+    userDispatch({ type: 'LOGOFF' });
+  };
+
   const getUser = async (): Promise<void> => {
     const response = await userService.getUser();
     const statusCode = response.status;
@@ -171,7 +179,8 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = (
     addUser,
     loginUser,
     logged,
-    getUser
+    getUser,
+    logoff
   };
 
   // Render the UserContextProvider with the context value and child components
