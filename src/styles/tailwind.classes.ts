@@ -24,6 +24,10 @@ export const wrapperInputBorderBottomMd = `
 flex justify-center flex-nowrap items-center self-center w-3/4 md:w-4/12
 `;
 
+export const borderBottom = `
+self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-full
+`;
+
 export const inputTransparent = `
 appearance-none bg-transparent border-none w-full dark:text-gray-100 leading-tight focus:outline-none
 `;
@@ -40,3 +44,15 @@ dark:border-zinc-800
 dark:text-white`;
 
 export const badgeMenuDashboard = ` border my-4 rounded-md  dark:bg-opacity-0 bg-cinder-100 border-cinder-400 dark:border-zinc-800`;
+
+export const labelup = `
+block dark:text-gray-100 text-sm mb-2
+`;
+
+export const textArea = `
+mt-2 block w-full self-center appearance-none bg-zinc-700 border-zinc-900 shadow-lg  dark:text-gray-100 leading-tight
+`;
+
+export const wrapperTextAreaMd = `
+self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-3/4 md:w-4/12
+`;

@@ -38,9 +38,12 @@ const getHeadersWithToken = async (): Promise<{
   [key: string]: string;
 } | null> => {
   const token = await getToken();
-  const headers = {
-    Authorization: token ? `Bearer ${token}` : null
-  };
+  const headers = {};
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   return headers;
 };
 

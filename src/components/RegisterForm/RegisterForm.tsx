@@ -14,7 +14,12 @@ import { encrypt } from 'utils/encriptation';
 import { SvgRefresh } from 'components/svg/SvgRefresh';
 import { SvgViewPassword } from 'components/svg/SvgViewPassword';
 import { SvgHiddenPassword } from 'components/svg/SvgHiddenPassword';
-import { wrapperInputBorderBottomMd } from 'styles/tailwind.classes';
+import {
+  labelup,
+  textArea,
+  wrapperInputBorderBottomMd,
+  wrapperTextAreaMd
+} from 'styles/tailwind.classes';
 const RegisterForm = () => {
   const [form, setForm] = useState({
     title: '',
@@ -96,9 +101,7 @@ const RegisterForm = () => {
       {/* Title */}
       <div className={wrapperInputBorderBottomMd}>
         <div className="self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
-          <label className="block dark:text-gray-100 text-sm mb-2 ">
-            Title
-          </label>
+          <label className={labelup}>Title</label>
           <input
             type="text"
             value={form.title}
@@ -111,9 +114,7 @@ const RegisterForm = () => {
       {/* Login */}
       <div className={wrapperInputBorderBottomMd}>
         <div className="self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
-          <label className="block dark:text-gray-100 text-sm mb-2 ">
-            Login
-          </label>
+          <label className={labelup}>Login</label>
           <input
             type="text"
             value={form.login}
@@ -127,9 +128,7 @@ const RegisterForm = () => {
       {/* Password */}
       <div className={wrapperInputBorderBottomMd}>
         <div className="self-center flex flex-col items-start  w-full">
-          <label className="block dark:text-gray-100 text-sm mb-2">
-            password
-          </label>
+          <label className={labelup}>password</label>
           <div className="flex items-center w-full ">
             <input
               type={toggleView ? 'text' : 'password'}
@@ -152,9 +151,7 @@ const RegisterForm = () => {
       {/* Website */}
       <div className={wrapperInputBorderBottomMd}>
         <div className="self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-full ">
-          <label className="block dark:text-gray-100 text-sm mb-2 ">
-            Website
-          </label>
+          <label className={labelup}>Website</label>
           <input
             type="text"
             value={form.website}
@@ -164,10 +161,10 @@ const RegisterForm = () => {
         </div>
       </div>
 
-      <div className="self-center flex flex-col items-start hover:border-b-4 border-b-2  border-cinder-900 hover:border-cinder-800  w-3/4 md:w-4/12">
-        <label className="block dark:text-gray-100 text-sm mb-2">Notes</label>
+      <div className={wrapperTextAreaMd}>
+        <label className={labelup}>Notes</label>
         <textarea
-          className="mt-2 block w-full self-center appearance-none bg-zinc-700 border-zinc-900 shadow-lg  dark:text-gray-100 leading-tight "
+          className={textArea}
           rows="3"
           value={form.notes}
           onChange={(e) => setForm({ ...form, notes: e.target.value })}

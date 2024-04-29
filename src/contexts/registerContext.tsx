@@ -17,6 +17,7 @@ interface RegisterContextType {
   registerDispatch: Dispatch<RegisterAction>;
   createRegister: (payload: Register) => Promise<void>;
   getRegisters: () => Promise<void>;
+  getRegisterDetails: (id: string) => Promise<void>;
 }
 
 const initialRegisterState = {
@@ -45,7 +46,8 @@ export const RegisterContext: React.Context<RegisterContextType> =
     registerState: initialRegisterState,
     registerDispatch: () => {},
     createRegister: async () => {},
-    getRegisters: async () => {}
+    getRegisters: async () => {},
+    getRegisterDetails: async () => {}
   });
 
 export const RegisterContextProvider: React.FC<{
@@ -59,11 +61,8 @@ export const RegisterContextProvider: React.FC<{
   const createRegister = async (payload: Register): Promise<void> => {
     const response = await registerService.createRegister(payload);
     const statusCode = response.status;
-    if (statusCode === 201) {
-      registerDispatch({
-        type: 'SET_REGISTER',
-        register: payload
-      });
+    if (statusCode !== 201) {
+      throw new Error('Error create register');
     }
   };
 
@@ -78,11 +77,24 @@ export const RegisterContextProvider: React.FC<{
     }
   };
 
+  const getRegisterDetails = async (id: string): Promise<void> => {
+    const response = await registerService.getRegisterDetails(id);
+    const statusCode = response.status;
+    if (statusCode === 200) {
+      console.log(response.data);
+      registerDispatch({
+        type: 'SET_REGISTER',
+        register: response.data
+      });
+    }
+  };
+
   const contextValue: RegisterContextType = {
     registerState,
     registerDispatch,
     createRegister,
-    getRegisters
+    getRegisters,
+    getRegisterDetails
   };
 
   return (
